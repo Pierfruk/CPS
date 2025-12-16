@@ -1,0 +1,576 @@
+{
+  "status": "..",
+  "startTime": "Sun Dec 14 2025 18:25:00 GMT+0100 (Ora standard dell’Europa centrale)",
+  "freqs": [
+    {
+      "cst": "Cassiopeia",
+      "f": 1058.98673,
+      "note": "C6  -21"
+    },
+    {
+      "cst": "Cassiopeia",
+      "f": 1147.391737,
+      "note": "D6  -41"
+    },
+    {
+      "cst": "Cassiopeia",
+      "f": 677.6333372,
+      "note": "E5  -48"
+    },
+    {
+      "cst": "Cassiopeia",
+      "f": 889.9940623,
+      "note": "A5  -20"
+    },
+    {
+      "cst": "Hydra",
+      "f": 2788.266569,
+      "note": "F7  -3"
+    },
+    {
+      "cst": "Hydra",
+      "f": 8908.164531,
+      "note": "C#9 -7"
+    },
+    {
+      "cst": "Hydra",
+      "f": 904.2080575,
+      "note": "A5  -47"
+    },
+    {
+      "cst": "Hydra",
+      "f": 6563.509688,
+      "note": "G#8 -21"
+    },
+    {
+      "cst": "Hydra",
+      "f": 21818.81018,
+      "note": "Ultrasuono"
+    },
+    {
+      "cst": "Hydra",
+      "f": 0,
+      "note": ""
+    },
+    {
+      "cst": "Hydra",
+      "f": 2624.008253,
+      "note": "E7  -9"
+    },
+    {
+      "cst": "Hydra",
+      "f": 39495.09577,
+      "note": "Ultrasuono"
+    },
+    {
+      "cst": "Hydra",
+      "f": 329058.585,
+      "note": "Ultrasuono"
+    },
+    {
+      "cst": "Hydra",
+      "f": 136129.7241,
+      "note": "Ultrasuono"
+    },
+    {
+      "cst": "Hydra",
+      "f": 242.5707658,
+      "note": "B3  -31"
+    },
+    {
+      "cst": "Hydra",
+      "f": 2880.852872,
+      "note": "F#7 -47"
+    },
+    {
+      "cst": "Hydra",
+      "f": 17.7473646,
+      "note": "C#0 42"
+    },
+    {
+      "cst": "Hydra",
+      "f": 8093.94199,
+      "note": "B8  -42"
+    },
+    {
+      "cst": "Hydra",
+      "f": 10300.12093,
+      "note": "E9  -41"
+    },
+    {
+      "cst": "Hydra",
+      "f": 0,
+      "note": ""
+    },
+    {
+      "cst": "Hydra",
+      "f": 987.6626988,
+      "note": "B5 0"
+    },
+    {
+      "cst": "Hydra",
+      "f": 2541.641666,
+      "note": "D#7 -36"
+    },
+    {
+      "cst": "Ursa Major",
+      "f": 38922.11058,
+      "note": "Ultrasuono"
+    },
+    {
+      "cst": "Ursa Major",
+      "f": 36381.9487,
+      "note": "Ultrasuono"
+    },
+    {
+      "cst": "Ursa Major",
+      "f": 8398.840147,
+      "note": "C9  -6"
+    },
+    {
+      "cst": "Ursa Major",
+      "f": 48171.04473,
+      "note": "Ultrasuono"
+    },
+    {
+      "cst": "Ursa Major",
+      "f": 8.07108e-7,
+      "note": "Infrasuono"
+    },
+    {
+      "cst": "Ursa Major",
+      "f": 10440.2214,
+      "note": "E9  -18"
+    },
+    {
+      "cst": "Ursa Major",
+      "f": 1064630.914,
+      "note": "Ultrasuono"
+    },
+    {
+      "cst": "Ursa Major",
+      "f": 9646.751094,
+      "note": "D9  -45"
+    },
+    {
+      "cst": "Ursa Major",
+      "f": 523.2479926,
+      "note": "C5  0"
+    },
+    {
+      "cst": "Ursa Major",
+      "f": 4746.5138,
+      "note": " D8 -18"
+    },
+    {
+      "cst": "Ursa Major",
+      "f": 30597.63945,
+      "note": "Ultrasuono"
+    },
+    {
+      "cst": "Ursa Major",
+      "f": 11894.24542,
+      "note": "F#9 -8"
+    },
+    {
+      "cst": "Ursa Major",
+      "f": 16824.23127,
+      "note": "Ultrasuono"
+    },
+    {
+      "cst": "Ursa Major",
+      "f": 567857.4503,
+      "note": "Ultrasuono"
+    },
+    {
+      "cst": "Ursa Major",
+      "f": 5833.249771,
+      "note": "F#8 -26"
+    },
+    {
+      "cst": "Ursa Major",
+      "f": 466.4895419,
+      "note": "A#4 -1"
+    },
+    {
+      "cst": "Ursa Major",
+      "f": 1338692.468,
+      "note": "Ultrasuono"
+    },
+    {
+      "cst": "Ursa Major",
+      "f": 173900.8456,
+      "note": "Ultrasuono"
+    },
+    {
+      "cst": "Ursa Major",
+      "f": 1393.671913,
+      "note": "F6  -4"
+    },
+    {
+      "cst": "Ursa Major",
+      "f": 1665355.734,
+      "note": "Ultrasuono"
+    },
+    {
+      "cst": "Ursa Major",
+      "f": 30906.79008,
+      "note": "Ultrasuono"
+    },
+    {
+      "cst": "Leo",
+      "f": 3350.947416,
+      "note": "G#7 -15"
+    },
+    {
+      "cst": "Leo",
+      "f": 15138.65436,
+      "note": "A#9 -26"
+    },
+    {
+      "cst": "Leo",
+      "f": 3082.580766,
+      "note": "G7  -30"
+    },
+    {
+      "cst": "Leo",
+      "f": 4710.162812,
+      "note": "D8  -4"
+    },
+    {
+      "cst": "Leo",
+      "f": 5933.719566,
+      "note": "F#8 -4"
+    },
+    {
+      "cst": "Leo",
+      "f": 3749.527309,
+      "note": "A#7 -9"
+    },
+    {
+      "cst": "Leo",
+      "f": 50885.98457,
+      "note": "Ultrasuono"
+    },
+    {
+      "cst": "Leo",
+      "f": 42.39568932,
+      "note": "E1  49"
+    },
+    {
+      "cst": "Leo",
+      "f": 37.72746981,
+      "note": "D1  47"
+    },
+    {
+      "cst": "Leo",
+      "f": 108412.6568,
+      "note": "Ultrasuono"
+    },
+    {
+      "cst": "Leo",
+      "f": 6262.464623,
+      "note": "G8  -3"
+    },
+    {
+      "cst": "Leo",
+      "f": 3041.238486,
+      "note": "F#7 -47"
+    },
+    {
+      "cst": "Leo",
+      "f": 5112.872119,
+      "note": "D#8 -46"
+    },
+    {
+      "cst": "Leo",
+      "f": 25.30424581,
+      "note": "G#0 -44"
+    },
+    {
+      "cst": "Leo",
+      "f": 9609.006557,
+      "note": "D9  -39"
+    },
+    {
+      "cst": "Leo",
+      "f": 51.77645246,
+      "note": "G#1 -5"
+    },
+    {
+      "cst": "Virgo",
+      "f": 8982.933907,
+      "note": "C#9 -22"
+    },
+    {
+      "cst": "Virgo",
+      "f": 1283.164155,
+      "note": "E6  -47"
+    },
+    {
+      "cst": "Virgo",
+      "f": 1114.901297,
+      "note": "C#6 -10"
+    },
+    {
+      "cst": "Virgo",
+      "f": 5358.051192,
+      "note": "E8  -27"
+    },
+    {
+      "cst": "Virgo",
+      "f": 1593.009578,
+      "note": "G6  -27"
+    },
+    {
+      "cst": "Virgo",
+      "f": 36.45527712,
+      "note": "D1  -12"
+    },
+    {
+      "cst": "Virgo",
+      "f": 7177.887027,
+      "note": "A8  -34"
+    },
+    {
+      "cst": "Virgo",
+      "f": 2726.217181,
+      "note": "F7  -42"
+    },
+    {
+      "cst": "Virgo",
+      "f": 450.4912426,
+      "note": "A4  -41"
+    },
+    {
+      "cst": "Virgo",
+      "f": 38356.87956,
+      "note": "Ultrasuono"
+    },
+    {
+      "cst": "Virgo",
+      "f": 23.53778681,
+      "note": "F#0 31"
+    },
+    {
+      "cst": "Virgo",
+      "f": 2134.18846,
+      "note": "C7  -34"
+    },
+    {
+      "cst": "Virgo",
+      "f": 6123.286288,
+      "note": "G8  -42"
+    },
+    {
+      "cst": "Bootes",
+      "f": 12844.7186,
+      "note": "G9  -41"
+    },
+    {
+      "cst": "Bootes",
+      "f": 1905.070904,
+      "note": "A#6 -37"
+    },
+    {
+      "cst": "Bootes",
+      "f": 18649.70923,
+      "note": "Ultrasuono"
+    },
+    {
+      "cst": "Bootes",
+      "f": 2943.11716,
+      "note": "F#7 -10"
+    },
+    {
+      "cst": "Bootes",
+      "f": 152780.7753,
+      "note": "Ultrasuono"
+    },
+    {
+      "cst": "Bootes",
+      "f": 7049.804927,
+      "note": "A8  -2"
+    },
+    {
+      "cst": "Bootes",
+      "f": 5236.403697,
+      "note": "E8  -12"
+    },
+    {
+      "cst": "Bootes",
+      "f": 225069.0108,
+      "note": "Ultrasuono"
+    },
+    {
+      "cst": "Bootes",
+      "f": 2605.523017,
+      "note": "E7  -21"
+    },
+    {
+      "cst": "Bootes",
+      "f": 2891199.563,
+      "note": "Ultrasuono"
+    },
+    {
+      "cst": "Bootes",
+      "f": 2314.265122,
+      "note": "D7  -26"
+    },
+    {
+      "cst": "Bootes",
+      "f": 2163.593337,
+      "note": "C#7 -43"
+    },
+    {
+      "cst": "Bootes",
+      "f": 2919.721129,
+      "note": "F#7 -24"
+    },
+    {
+      "cst": "Draco",
+      "f": 14969.34955,
+      "note": "A#9 -6"
+    },
+    {
+      "cst": "Draco",
+      "f": 40213.67487,
+      "note": "Ultrasuono"
+    },
+    {
+      "cst": "Draco",
+      "f": 1252.512456,
+      "note": "D#6 -11"
+    },
+    {
+      "cst": "Draco",
+      "f": 1092.311745,
+      "note": "C#6 -26"
+    },
+    {
+      "cst": "Draco",
+      "f": 23004.6816,
+      "note": "Ultrasuono"
+    },
+    {
+      "cst": "Draco",
+      "f": 1690.634302,
+      "note": "G#6 -30"
+    },
+    {
+      "cst": "Draco",
+      "f": 27710.86029,
+      "note": "Ultrasuono"
+    },
+    {
+      "cst": "Draco",
+      "f": 1727.118997,
+      "note": "A6  -33"
+    },
+    {
+      "cst": "Draco",
+      "f": 3608.600008,
+      "note": "A7  -43"
+    },
+    {
+      "cst": "Draco",
+      "f": 81599.34893,
+      "note": "Ultrasuono"
+    },
+    {
+      "cst": "Draco",
+      "f": 1206.051995,
+      "note": "D6  -46"
+    },
+    {
+      "cst": "Draco",
+      "f": 1389.22139,
+      "note": "F6  -10"
+    },
+    {
+      "cst": "Draco",
+      "f": 2842.600019,
+      "note": "F7  -30"
+    },
+    {
+      "cst": "Draco",
+      "f": 211291.3609,
+      "note": "Ultrasuono"
+    },
+    {
+      "cst": "Draco",
+      "f": 1400.826043,
+      "note": "F6  -5"
+    },
+    {
+      "cst": "Draco",
+      "f": 1929.428285,
+      "note": "B6  -41"
+    },
+    {
+      "cst": "Cepheus",
+      "f": 359.040065,
+      "note": "F4  48"
+    },
+    {
+      "cst": "Cepheus",
+      "f": 300.0375894,
+      "note": "D4  37"
+    },
+    {
+      "cst": "Cepheus",
+      "f": 5.398886479,
+      "note": "Infrasuono"
+    },
+    {
+      "cst": "Cepheus",
+      "f": 5699.698507,
+      "note": "F8  -34"
+    },
+    {
+      "cst": "Cepheus",
+      "f": 490.7186114,
+      "note": "B4  -11"
+    },
+    {
+      "cst": "Cepheus",
+      "f": 133.9602918,
+      "note": "C3  41"
+    },
+    {
+      "cst": "Cepheus",
+      "f": 508.994359,
+      "note": "C5  -48"
+    },
+    {
+      "cst": "Cepheus",
+      "f": 5198.057981,
+      "note": "E8  -25"
+    },
+    {
+      "cst": "Cepheus",
+      "f": 4.965691774,
+      "note": "Infrasuono"
+    },
+    {
+      "cst": "Cepheus",
+      "f": 6195.875293,
+      "note": "G8  -21"
+    },
+    {
+      "cst": "Cepheus",
+      "f": 2280241.002,
+      "note": "Ultrasuono"
+    }
+  ],
+  "sketchs": [
+    "Cassiopeia",
+    "Hydra",
+    "Ursa Major",
+    "Leo",
+    "Virgo",
+    "Bootes",
+    "Draco",
+    "Cepheus"
+  ]
+}

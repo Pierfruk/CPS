@@ -1,0 +1,358 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="lib/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="lib/constellation-sketcher/dist/constellation_sketcher.bundle.js"></script>
+    <script type="text/javascript" src="lib/exstat/index.min.js"></script>
+    <script type="text/javascript" src="js/stars.js"></script>
+    <script type="text/javascript" src="js/scene.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.halo.min.js"></script>
+    <script src="https://unpkg.com/tone"></script>
+
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            background-color: #000000;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            display: flex;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background-color: white;
+            box-shadow: 0 0 6px 1px rgba(255, 255, 255, 0.35) !important;
+            opacity: 0;
+            transition: opacity 1s;
+            z-index: -1;
+        }
+
+
+        #clock {
+            position: fixed;
+            display: inline-block;
+            padding: 5px;
+            border: 1px solid white;
+            color: white;
+            font-size: 1em;
+            font-weight: lighter;
+            z-index: auto;
+            font-family: monospace;
+        }
+
+        #countdown {
+            min-width: 100vw;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            font-size: 8em;
+            color: #dc0036;
+            justify-content: center;
+        }
+
+        #vanta {
+            position: fixed;
+            min-width: 100vw;
+            min-height: 100vh;
+            z-index: auto;
+            display: flex;
+            align-items: center;
+        }
+
+        #vanta-caption {
+            position: fixed;
+            min-width: 100vw;
+            min-height: 100vh;
+            z-index: auto;
+            display: flex;
+            align-items: center;
+            font-size: 2em;
+            color: #ffffff30;
+            justify-content: center;
+        }
+
+        #constellation {
+            position: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 100vw;
+            min-height: 100vh;
+            z-index: auto;
+        }
+
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.1;
+            }
+        }
+       
+    </style>
+
+</head>
+<body>
+    <div id="clock">00:00:00</div>
+    <div id="countdown"></div>
+    <div id="vanta"></div>
+    <div id="vanta-caption"></div>
+    <div id="constellation">
+        <canvas id="constellation-sketcher"></canvas>
+    </div>
+
+    <script>
+        const container_clock = document.getElementById("clock");
+        const container_countdown = document.getElementById("countdown");
+        const container_vanta = document.getElementById("vanta");
+        const container_vanta_caption = document.getElementById("vanta-caption");
+        const container_constellation = document.getElementById("constellation");
+        const container_constellation_sketcher = document.getElementById("constellation-sketcher");
+
+
+
+        let scene;                  // oggetto globale scena
+        let program;                // programma
+
+        let normalized = [];        // frequenze normalizzate
+        let history = [];           // programma eseguito
+        let next = false;           // switch esegui scena
+        let synth;                  // oggetto audio
+        let noise;                  // oggetto audio
+
+        let indexSketch = 0;
+        let isSkecthing = false;
+        let isPlaying = false;
+        let programKey = 0;
+
+
+
+        document.querySelector("body")?.addEventListener("click", async (e) => {
+            if (next) {
+                return;
+            }
+          
+            await Tone.start();
+            synth = new Tone.Synth().toDestination();
+            synth.volume.value = -10;
+            synth.envelope.attack = 5;
+            synth.envelope.decay = 1;
+            synth.envelope.sustain = 1;
+            synth.envelope.release = 3;
+            noise = new Tone.Noise("pink").toDestination();
+            noise.volume = -30;
+            noise.fadeIn = 5;
+            noise.fadeOut = 7;
+            document.querySelector("body")?.addEventListener("mousedown", async () => {
+                noise.start();
+            });
+            document.querySelector("body")?.addEventListener("mouseup", async () => {
+                noise.stop();
+            });
+            console.info("Audio is ready");
+            fetchScene.then((e) => {
+                var d = new Date();
+                var fd = new Date();
+                fd.setTime(d.getTime() + 10000);
+                e.startTime = fd;
+                console.info(`Scene status: ${e.status} - startTime: ${e.startTime}`)
+                program = getProgram(10, e.startTime, e.freqs, e.sketchs);
+                var freqs = [];             // frequenze da normalizzare
+                program.filter(x => x.action == 'play').forEach(element => {
+                    freqs.push(element.data.f);
+                });
+                normalized = normalize(freqs, [0.1, 3]);
+                console.log(`Normalized values: ${normalized.length} between [0, 3]`);
+                console.log(`Countdown to ${e.startTime}`);
+                scene = e;
+            });
+        }, { once: true });
+
+        function getGlock() {
+
+            var d = new Date();
+            container_clock.innerHTML = d.toLocaleTimeString();
+            if (!next) {
+                if (scene != undefined) {
+                    var sd = new Date(scene.startTime);
+                    var secs = Math.floor((sd.getTime() - d.getTime()) / 1000);
+                    if (secs >= 0) {
+                        container_countdown.innerHTML = secs;
+                        return;
+                    }
+                    else {
+                        container_countdown.style = "display:none";
+                        next = true;
+                    }
+                }
+                else {
+                    return;
+                }
+            }
+
+            next = !(isSkecthing || isPlaying);
+
+            if (!next) {
+                return;
+            }
+
+            var h = d.getHours();
+            var m = d.getMinutes();
+            var s = d.getSeconds();
+            var key = ((h < 10) ? '0' + h : h) + ':' + ((m < 10) ? '0' + m : m) + ':' + ((s < 10) ? '0' + s : s);
+
+            //var prev = history.find((element) => element.time === key);
+            var prev = history.find((element) => element.key === programKey);
+            if (prev == undefined) {
+                //var s = program.find((element) => element.time === key);
+                var s = program.find((element) => element.key === programKey);
+                if (history.length < (scene.freqs.length + scene.sketchs.length)) {
+                    if (s != undefined) {
+                        console.info('Exec key ' + s.key + ' origin time ' + s.time + ' -> action:' + s.action + `(${program.indexOf(s)})`);
+
+                        switch (s.action) {
+                            case "sketch":
+                                isSkecthing = true;
+
+                                
+
+                                container_constellation_sketcher.width = container_constellation_sketcher.height = window.screen.height;
+
+                                //if (window.screen.width >= 1024 && window.screen.height >= 768) {
+                                //    // Resolution is 1024x768 or above
+                                //}
+                                ConstellationSketcher.setSpeedScale(0.5);
+                                ConstellationSketcher.setConstellation(scene.sketchs[indexSketch])
+                                ConstellationSketcher.setDrawBeginCallback((ctx) => { placeRandomStars(container_constellation); $(container_constellation_sketcher).fadeIn(1000); });//$(container_vanta).fadeOut(1000,'linear',()=> $(container_constellation_sketcher).fadeIn(1000));
+                                ConstellationSketcher.setDrawCompleteCallback((ctx) => { removeExistingStars(container_constellation); indexSketch++; $(container_constellation_sketcher).fadeOut(2000, () => { isSkecthing = false; }); });//$(container_constellation_sketcher).fadeOut(1000, 'linear', ()=> $(container_vanta).fadeIn(1000));
+                                ConstellationSketcher.sketch();
+                                break;
+                            case "play":
+                                isPlaying = true;
+                                setVANTA(s.data.cst)
+                                    .then(() => {
+                                        return playTone(s.data.f, s.data.cst, 10000);
+                                    })
+                                    .then(() => { isPlaying = false; });
+                                break;
+                            default:
+                                break;
+                        }
+                        history.push(key);
+                        programKey++;
+                    }
+                } else {
+                    // Fine programma
+                    stopVANTA();
+                    clearInterval(seq);
+                    console.info('End ' + d.toLocaleTimeString());
+                }
+            }
+            console.debug(`getGlock ${key}`);
+        }
+
+        // Loop
+        let seq = setInterval(getGlock, 1000);
+
+        // XHR
+        //async function populate() {
+        //    const requestURL = "scene.json";
+        //    const request = new Request(requestURL);
+        //    const response = await fetch(request);
+        //    const superHeroesText = await response.text();
+        //    const superHeroes = JSON.parse(superHeroesText);
+        //    populateHeader(superHeroes);
+        //    populateHeroes(superHeroes);
+        //}
+        const fetchScene = new Promise((resolve, reject) => {
+            let url = '/js/scene.json';
+            let xhr = new XMLHttpRequest();
+            xhr.timeout = 4000; // time in milliseconds
+            xhr.responseType = 'json';
+            xhr.onload = (e) => {
+                if (xhr.readyState === 4) {
+                    isFetching = false;
+                    if (xhr.status === 200) {
+                        var o = xhr.response;
+                        resolve(new Scene(o.status, new Date(o.startTime), o.freqs, o.sketchs));
+                    } else {
+                        console.error(xhr.statusText);
+                    }
+                }
+            };
+            xhr.onerror = (e) => {
+                console.error(xhr.statusText);
+            };
+            xhr.ontimeout = (e) => {
+            };
+            xhr.open("GET", url, true);
+            xhr.send();
+        });
+
+
+        const playTone = function (f, cst, duration) {
+            return new Promise((resolve) => {
+                if ((f > 0) && (f < 24000)) {
+                    synth.triggerAttackRelease(f, "4");
+                } else {
+                    console.warn(`Skip f:${f} cst: ${cst}`)
+                }
+                setTimeout(() => { resolve(true); }, duration);
+            });
+        }
+    </script>
+
+    <script>
+        let vanta;
+        let vanta_idx = 0;
+        var vanta_caption = '';
+
+        const setVANTA = function (name) {
+            return new Promise((resolve, reject) => {
+                if (vanta_caption != name) {
+                    vanta_caption = name;
+                    container_vanta_caption.innerHTML = '';
+                    container_vanta_caption.innerHTML = vanta_caption;
+                }
+                var s = normalized[vanta_idx];
+                if (vanta == undefined) {
+                    vanta = VANTA.HALO({
+                        el: "#vanta",
+                        mouseControls: true,
+                        touchControls: true,
+                        gyroControls: false,
+                        minHeight: 400.00,
+                        minWidth: 400.00,
+                        baseColor: 0x590029,
+                        backgroundColor: 0x000000,
+                        size: 0.1
+                    });
+                }
+                vanta.setOptions({ size: s });
+                vanta_idx++;
+                console.log(`Updating VANTA (${name} ${s})`)
+                resolve();
+            });
+        }
+
+        const stopVANTA = function () {
+            if (vanta != undefined) {
+                vanta.destroy();
+            }
+            container_vanta_caption.innerHTML = '';
+        }
+    </script>
+</body>
+</html>
+

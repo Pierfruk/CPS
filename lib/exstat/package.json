@@ -1,0 +1,24 @@
+{
+  "name": "exstat",
+  "version": "1.1.1",
+  "description": "useful mathematics / cryptography-related functions",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha exstat.test.js",
+    "start": "node ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jpegzilla/exstat.git"
+  },
+  "author": "jpegzilla",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jpegzilla/exstat/issues"
+  },
+  "homepage": "https://github.com/jpegzilla/exstat#readme",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.2.1"
+  }
+}
