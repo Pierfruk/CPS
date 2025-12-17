@@ -87,19 +87,26 @@
             min-width: 100vw;
             min-height: 100vh;
             z-index: auto;
+           /* aspect-ratio: 1/1;*/
         }
-
-
-        @keyframes pulse {
-            0%, 100% {
-                opacity: 1;
+            #constellation-sketcher{
+                /*align-self:start;*/
             }
-
-            50% {
-                opacity: 0.1;
+            /*     @media (max-width: 576px) {
+            #constellation {
+                width: fit-content;
+                height: fit-content;
             }
-        }
-       
+        }*/
+            @keyframes pulse {
+                0%, 100% {
+                    opacity: 1;
+                }
+
+                50% {
+                    opacity: 0.1;
+                }
+            }
     </style>
 
 </head>
@@ -135,14 +142,39 @@
         let isSkecthing = false;
         let isPlaying = false;
         let programKey = 0;
+        let FLAG = false;           //ConstellationSketcher per bug metodo close()
+        //let SKETCHER_SIZE;  window.screen.availWidth;
+        if (screen.orientation.type == 'landscape-primary') {
+            SKETCHER_SIZE = window.screen.availHeight;  
+        } 
+        if (screen.orientation.type == 'portrait-primary') {
+            SKETCHER_SIZE = window.screen.availWidth;  
+        } 
+        const FADE_VANTA = 4000;
+        const FADE_SKETCHER = 2000;
+        const STEP_DURATION = 10000;
+     
+        $(container_constellation).fadeOut(0,() => { placeRandomStars(container_constellation) });
+        $(container_vanta_caption).fadeOut();
+        $(container_vanta).fadeOut();
 
-
-
+        screen.orientation.addEventListener("change", (event) => {
+            const type = event.target.type;
+            const angle = event.target.angle;
+          
+            if (type == 'landscape-primary') {
+                SKETCHER_SIZE = window.screen.availHeight;     
+            }
+            if (type == 'portrait-primary') {
+                SKETCHER_SIZE = window.screen.availWidth;
+            }
+        });
+       
         document.querySelector("body")?.addEventListener("click", async (e) => {
             if (next) {
                 return;
             }
-          
+
             await Tone.start();
             synth = new Tone.Synth().toDestination();
             synth.volume.value = -10;
@@ -179,8 +211,7 @@
             });
         }, { once: true });
 
-        function getGlock() {
-
+       async function getGlock() {
             var d = new Date();
             container_clock.innerHTML = d.toLocaleTimeString();
             if (!next) {
@@ -224,25 +255,31 @@
                         switch (s.action) {
                             case "sketch":
                                 isSkecthing = true;
-
-                                
-
-                                container_constellation_sketcher.width = container_constellation_sketcher.height = window.screen.height;
-
+                                await stopVANTA();
+                                container_constellation_sketcher.width = container_constellation_sketcher.height = SKETCHER_SIZE; 
+                                if (FLAG) {
+                                    ConstellationSketcher.reset();
+                                }
                                 //if (window.screen.width >= 1024 && window.screen.height >= 768) {
                                 //    // Resolution is 1024x768 or above
                                 //}
                                 ConstellationSketcher.setSpeedScale(0.5);
                                 ConstellationSketcher.setConstellation(scene.sketchs[indexSketch])
-                                ConstellationSketcher.setDrawBeginCallback((ctx) => { placeRandomStars(container_constellation); $(container_constellation_sketcher).fadeIn(1000); });//$(container_vanta).fadeOut(1000,'linear',()=> $(container_constellation_sketcher).fadeIn(1000));
-                                ConstellationSketcher.setDrawCompleteCallback((ctx) => { removeExistingStars(container_constellation); indexSketch++; $(container_constellation_sketcher).fadeOut(2000, () => { isSkecthing = false; }); });//$(container_constellation_sketcher).fadeOut(1000, 'linear', ()=> $(container_vanta).fadeIn(1000));
+                                ConstellationSketcher.setDrawBeginCallback((ctx) => { $(container_constellation).fadeIn(FADE_SKETCHER); });//$(container_vanta).fadeOut(1000,'linear',()=> $(container_constellation_sketcher).fadeIn(1000));
+                                ConstellationSketcher.setDrawCompleteCallback((ctx) => {
+                                    indexSketch++;
+                                    setTimeout(() => {
+                                        $(container_constellation).fadeOut(FADE_SKETCHER, () => { FLAG = true; isSkecthing = false; });
+                                    }, 3000)
+                                });
+                                //$(container_constellation_sketcher).fadeOut(1000, 'linear', ()=> $(container_vanta).fadeIn(1000));
                                 ConstellationSketcher.sketch();
                                 break;
                             case "play":
                                 isPlaying = true;
                                 setVANTA(s.data.cst)
                                     .then(() => {
-                                        return playTone(s.data.f, s.data.cst, 10000);
+                                        return playTone(s.data.f, s.data.cst, STEP_DURATION);
                                     })
                                     .then(() => { isPlaying = false; });
                                 break;
@@ -254,7 +291,7 @@
                     }
                 } else {
                     // Fine programma
-                    stopVANTA();
+                    closeVANTA();
                     clearInterval(seq);
                     console.info('End ' + d.toLocaleTimeString());
                 }
@@ -276,7 +313,7 @@
         //    populateHeroes(superHeroes);
         //}
         const fetchScene = new Promise((resolve, reject) => {
-            let url = '/js/scene.json';
+            let url = 'js/scene.json';
             let xhr = new XMLHttpRequest();
             xhr.timeout = 4000; // time in milliseconds
             xhr.responseType = 'json';
@@ -319,7 +356,7 @@
         var vanta_caption = '';
 
         const setVANTA = function (name) {
-            return new Promise((resolve, reject) => {
+            return new Promise((resolve) => {
                 if (vanta_caption != name) {
                     vanta_caption = name;
                     container_vanta_caption.innerHTML = '';
@@ -341,12 +378,20 @@
                 }
                 vanta.setOptions({ size: s });
                 vanta_idx++;
-                console.log(`Updating VANTA (${name} ${s})`)
-                resolve();
+                console.log(`Updating VANTA (${name} ${s})`);
+                $(container_vanta).fadeIn(FADE_VANTA);
+                $(container_vanta_caption).fadeIn(FADE_VANTA, () => { resolve(); });
+            });
+        }
+        const stopVANTA = function () {
+            return new Promise((resolve) => {
+            
+                $(container_vanta_caption).fadeOut(FADE_VANTA, () => { container_vanta_caption.innerHTML = ''; });
+                $(container_vanta).fadeOut(FADE_VANTA, () => { resolve() });
             });
         }
 
-        const stopVANTA = function () {
+        const closeVANTA = function () {
             if (vanta != undefined) {
                 vanta.destroy();
             }
