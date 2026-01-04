@@ -1,6 +1,6 @@
 {
   "status": "..",
-  "startTime": "Sun Dec 14 2025 18:25:00 GMT+0100 (Ora standard dell’Europa centrale)",
+  "startTime": "Sun Jan 4 2026 18:25:00 GMT+0100 (Ora standard dell’Europa centrale)",
   "freqs": [
     {
       "cst": "Cassiopeia",
@@ -49,11 +49,6 @@
     },
     {
       "cst": "Hydra",
-      "f": 0,
-      "note": ""
-    },
-    {
-      "cst": "Hydra",
       "f": 2624.008253,
       "note": "E7  -9"
     },
@@ -96,11 +91,6 @@
       "cst": "Hydra",
       "f": 10300.12093,
       "note": "E9  -41"
-    },
-    {
-      "cst": "Hydra",
-      "f": 0,
-      "note": ""
     },
     {
       "cst": "Hydra",
@@ -563,17 +553,108 @@
       "note": "Ultrasuono"
     }
   ],
-  "sketchs": [
-    "Cassiopeia",
-    "Hydra",
-    "Ursa Major",
-    "Leo",
-    "Virgo",
-    "Bootes",
-    "Draco",
-    "Cepheus"
-  ],
-  "anims": [
-
+  "scenes": [
+    {
+      "action": "sketch",
+      "index": 1,
+      "name": "Cassiopeia",
+      "duration": 15
+    },
+    {
+      "action": "play",
+      "index": 2,
+      "name": "Cassiopeia",
+      "duration": 60
+    },
+    {
+      "action": "sketch",
+      "index": 3,
+      "name": "Hydra",
+      "duration": 21
+    },
+    {
+      "action": "play",
+      "index": 4,
+      "name": "Hydra",
+      "duration": 80
+    },
+    {
+      "action": "sketch",
+      "index": 5,
+      "name": "Ursa Major",
+      "duration": 10
+    },
+    {
+      "action": "play",
+      "index": 6,
+      "name": "Ursa Major",
+      "duration": 105
+    },
+    {
+      "action": "sketch",
+      "index": 7,
+      "name": "Leo",
+      "duration": 10
+    },
+    {
+      "action": "play",
+      "index": 8,
+      "name": "Leo",
+      "duration": 80
+    },
+    {
+      "action": "sketch",
+      "index": 9,
+      "name": "Virgo",
+      "duration": 10
+    },
+    {
+      "action": "play",
+      "index": 10,
+      "name": "Virgo",
+      "duration": 65
+    },
+    {
+      "action": "sketch",
+      "index": 11,
+      "name": "Bootes",
+      "duration": 10
+    },
+    {
+      "action": "play",
+      "index": 12,
+      "name": "Bootes",
+      "duration": 65
+    },
+    {
+      "action": "sketch",
+      "index": 13,
+      "name": "Draco",
+      "duration": 10
+    },
+    {
+      "action": "play",
+      "index": 14,
+      "name": "Draco",
+      "duration": 80
+    },
+    {
+      "action": "sketch",
+      "index": 15,
+      "name": "Cepheus",
+      "duration": 10
+    },
+    {
+      "action": "play",
+      "index": 16,
+      "name": "Cepheus",
+      "duration": 60
+    },
+    {
+      "action": "anim",
+      "index": 0,
+      "name": "start",
+      "duration": 10
+    }
   ]
 }

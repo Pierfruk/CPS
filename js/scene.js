@@ -20,16 +20,18 @@ function getKey2() {
 const getProgram = function (w, d, freqs, sketchs) {
     var i = 0;
     var base = 1;
+    var t0;
+    var t1;
     if (!isNaN(w)) {
         base *= w;
     }
 
     sketchs.forEach(elem1 => {
         var k = getKey2();
-        var t0 = getKey(d, i * base)
+        t0 = getKey(d, i * base)
         entries.push(new Step(k,t0, 'sketch', elem1));
         freqs.filter(x => x.cst == elem1).forEach(elem2 => {
-            var t1 = getKey(d, i * base);
+            t1 = getKey(d, i * base);
             k = getKey2();
             entries.push(new Step(k,t1, 'play', {f: elem2.f, cst: elem1}));
             console.debug(`time:${t1}, f: ${elem2.f}, cst: ${elem2.cst}`)
