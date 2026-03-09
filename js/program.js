@@ -3,6 +3,7 @@ const FADE_VANTA = 4000;
 const FADE_SKETCHER = 2000;
 const SKETCH_DURATION = 9000;
 const NOTE_DURATION = 4000;
+const NOTE_GAP = 3000;
 const COUNTDOWN = 10000;
 const CLOCK_SKEW = 1000;
 
@@ -28,10 +29,10 @@ function getKey(d, step, action) {
     switch (action) {
 
         case 'play':
-            ms += FADE_VANTA;
+            ms += FADE_VANTA*2;
             break;
         case 'sketch':
-            ms += (FADE_SKETCHER + SKETCH_DURATION);
+            ms += (FADE_SKETCHER*2 + SKETCH_DURATION);
             break;
         case 'anim':
             break;
@@ -40,7 +41,7 @@ function getKey(d, step, action) {
     ms += CLOCK_SKEW;
     fd.setTime(d.getTime() + ms);
     var key = formatTime(d);
-    return { fd, key };
+    return { fd, key,ms };
 }
 
 
@@ -48,10 +49,13 @@ const buildScenes = function (d, data) {
     var key;
     let entries = [];
     data.sort((a, b) => a.index - b.index);
+    var skew = new Date();
+    skew.setTime(d.getTime() + CLOCK_SKEW);
+    console.info(`Skewing ${d} to ${skew}`);
     data.forEach(elem1 => {
-        key = getKey(d, elem1.duration, elem1.action);
-        entries.push(new Scene(key.key, elem1.index, elem1.action, elem1.name, elem1.duration));
-        d = key.fd;
+        key = getKey(skew, elem1.duration, elem1.action);
+        entries.push(new Scene(key.key, elem1.index, elem1.action, elem1.name, elem1.duration ));
+        skew = key.fd;
     });
 
     console.info(`Program scenes built with ${entries.length} entries`)

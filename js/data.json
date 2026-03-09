@@ -564,7 +564,7 @@
       "action": "play",
       "index": 2,
       "name": "Cassiopeia",
-      "duration": 60
+      "duration": 30
     },
     {
       "action": "sketch",
@@ -576,7 +576,7 @@
       "action": "play",
       "index": 4,
       "name": "Hydra",
-      "duration": 80
+      "duration": 112
     },
     {
       "action": "sketch",
@@ -588,19 +588,19 @@
       "action": "play",
       "index": 6,
       "name": "Ursa Major",
-      "duration": 105
+      "duration": 147
     },
     {
       "action": "sketch",
       "index": 7,
       "name": "Leo",
-      "duration": 10
+      "duration": 15
     },
     {
       "action": "play",
       "index": 8,
       "name": "Leo",
-      "duration": 80
+      "duration": 112
     },
     {
       "action": "sketch",
@@ -612,7 +612,7 @@
       "action": "play",
       "index": 10,
       "name": "Virgo",
-      "duration": 65
+      "duration": 91
     },
     {
       "action": "sketch",
@@ -624,7 +624,7 @@
       "action": "play",
       "index": 12,
       "name": "Bootes",
-      "duration": 65
+      "duration": 91
     },
     {
       "action": "sketch",
@@ -636,7 +636,7 @@
       "action": "play",
       "index": 14,
       "name": "Draco",
-      "duration": 80
+      "duration": 112
     },
     {
       "action": "sketch",
@@ -648,13 +648,13 @@
       "action": "play",
       "index": 16,
       "name": "Cepheus",
-      "duration": 60
+      "duration": 77
     },
     {
       "action": "anim",
       "index": 0,
       "name": "start",
-      "duration": 10
+      "duration": 2
     }
   ]
 }
